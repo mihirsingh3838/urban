@@ -1,3 +1,6 @@
+// src/components/HeaderMegaMenu.tsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Group,
   Button,
@@ -12,8 +15,17 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import classes from './HeaderMegaMenu.module.css';
 
-export function HeaderMegaMenu() {
+export const HeaderMegaMenu: React.FC = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const navigate = useNavigate();
+
+  const handleSignupClick = () => {
+    navigate('/register');
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <Box>
@@ -28,8 +40,8 @@ export function HeaderMegaMenu() {
             </Title>
 
           <div className="flex items-center space-x-4 ml-auto">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="default" onClick={handleLoginClick}>Log in</Button>
+            <Button onClick={handleSignupClick}>Sign up</Button>
             <Burger opened={drawerOpened} onClick={toggleDrawer} />
           </div>
         </div>
@@ -62,8 +74,8 @@ export function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
+            <Button variant="default" onClick={handleLoginClick}>Log in</Button>
+            <Button onClick={handleSignupClick}>Sign up</Button>
           </Group>
         </ScrollArea>
       </Drawer>
